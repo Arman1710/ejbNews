@@ -1,7 +1,6 @@
 package epam.news.action;
 
 import epam.news.model.dto.UserDTO;
-import epam.news.services.SecurityService;
 import epam.news.services.UserService;
 import epam.news.util.UserValidator;
 
@@ -20,9 +19,6 @@ public class Registration extends HttpServlet {
 
     @Inject
     private UserService userService;
-
-    @Inject
-    private SecurityService securityService;
 
     @Inject
     private UserValidator userValidator;

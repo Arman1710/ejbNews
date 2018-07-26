@@ -79,7 +79,7 @@ public class NewsService {
         LOGGER.info("Comments :" + news + "is created");
     }
 
-    public void deleteNews(Long newsId) {
+    public void deleteNews(final Long newsId) {
         LOGGER.info("delete news :" + newsId);
 
         newsDAO.delete(newsDAO.findById(newsId));
@@ -88,13 +88,13 @@ public class NewsService {
     }
 
     public void deleteComment(final Long newsId, final Long commentId) {
-        LOGGER.info("delete news :" + commentId);
+        LOGGER.info("delete comment :" + commentId);
         final News news = newsDAO.findById(newsId);
         final Iterator<Comment> itr = news.getCommentList().iterator();
 
         while (itr.hasNext()) {
             Comment comment = itr.next();
-            if (comment.getCommentId() == commentId) {
+            if (comment.getCommentId().equals(commentId)) {
                 itr.remove();
             }
         }

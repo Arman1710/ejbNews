@@ -50,13 +50,13 @@
                         </div>
                     </div>
                     <sec:authorize access="hasRole('ROLE_ADMIN')">
-                    <p>
-                    <form action="/admin/editNewsPage">
-                        <input type="hidden" name="newsId" value="${news.newsId}">
-                        <input type="submit" class="btn btn-primary btn-md"
-                               value="<fmt:message key="editNews"/>">
-                    </form>
-                    </p>
+                        <p>
+                        <form action="/admin/editNewsPage">
+                            <input type="hidden" name="newsId" value="${news.newsId}">
+                            <input type="submit" class="btn btn-primary btn-md"
+                                   value="<fmt:message key="editNews"/>">
+                        </form>
+                        </p>
                     </sec:authorize>
                 </div>
             </div>
@@ -73,16 +73,16 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td><fmt:message key="comment.Description"/></td>
                     <td>
-                        <textarea name="author" cols="100" rows="2" class="form-control mr-sm-2" required>
-                    </textarea>
+                        <fmt:message key="comment.Description"/>
+                    </td>
+                    <td>
+                        <textarea name="author" cols="100" rows="2" class="form-control mr-sm-2" required></textarea>
                     </td>
                 </tr>
-                </tr>
+                <tr>
                 <td>
-                        <textarea name="description" cols="100" rows="5" class="form-control mr-sm-2" required>
-                    </textarea>
+                    <textarea name="description" cols="100" rows="5" class="form-control mr-sm-2" required></textarea>
                 </td>
                 </tr>
                 <tr>
@@ -119,11 +119,11 @@
                                 </li>
                             </ul>
                         </div>
-                            <sec:authorize access="hasRole('ROLE_ADMIN')">
-                        <div class="col-md-1">
-                            <input type="checkbox" name="checkedComments" value="${comment.commentId}">
-                        </div>
-                            </sec:authorize>
+                        <sec:authorize access="hasRole('ROLE_ADMIN')">
+                            <div class="col-md-1">
+                                <input type="checkbox" name="checkedComments" value="${comment.commentId}">
+                            </div>
+                        </sec:authorize>
                     </div>
 
                     <hr>
