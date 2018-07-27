@@ -3,9 +3,11 @@ package epam.news.model.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "users")
+@XmlRootElement
 public class User extends Basic {
 
     @Id

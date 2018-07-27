@@ -2,9 +2,11 @@ package epam.news.model.dto;
 
 import epam.news.model.entity.Role;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
+@XmlRootElement
 public class UserDTO {
 
     private Long userId;

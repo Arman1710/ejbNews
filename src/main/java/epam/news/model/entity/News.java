@@ -1,16 +1,16 @@
 package epam.news.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "news")
-@JsonAutoDetect
+@XmlRootElement
 public class News extends Basic {
 
     @Id

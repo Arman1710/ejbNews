@@ -1,10 +1,12 @@
 package epam.news.model.dto;
 
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@XmlRootElement
 public class NewsDTO {
     private List<NewsDTO> newsList = new ArrayList<>();
     private String title;

@@ -1,14 +1,12 @@
 package epam.news.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "comments")
-@JsonAutoDetect
 public class Comment extends Basic {
 
     @Id
