@@ -1,8 +1,7 @@
 package epam.news.action;
 
-import epam.news.services.NewsService;
+import epam.news.services.impl.NewsServiceImpl;
 
-import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +14,7 @@ import java.io.IOException;
 public class DeleteComment extends HttpServlet {
 
     @Inject
-    private NewsService newsService;
+    private NewsServiceImpl newsServiceImpl;
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,7 +22,7 @@ public class DeleteComment extends HttpServlet {
         String[] checkedComments = request.getParameterValues("checkedComments");
         if (checkedComments != null) {
             for (String checkboxValue : checkedComments) {
-                newsService.deleteComment(newsId, Long.valueOf(checkboxValue));
+                newsServiceImpl.deleteComment(newsId, Long.valueOf(checkboxValue));
             }
         }
         request.getRequestDispatcher("/selectedNews").forward(request, response);

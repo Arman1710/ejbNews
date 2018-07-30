@@ -1,9 +1,8 @@
 package epam.news.action;
 
 import epam.news.model.entity.News;
-import epam.news.services.NewsService;
+import epam.news.services.impl.NewsServiceImpl;
 
-import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,11 +16,11 @@ import java.util.List;
 public class ShowAllNews extends HttpServlet {
 
     @Inject
-    private NewsService newsService;
+    private NewsServiceImpl newsServiceImpl;
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<News> newsList = newsService.showAllNews();
+        List<News> newsList = newsServiceImpl.showAllNews();
         request.setAttribute("newsList", newsList);
         request.getRequestDispatcher("/WEB-INF/view/main.jsp").forward(request, response);
 

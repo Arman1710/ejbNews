@@ -31,34 +31,21 @@ public class NewsDAOImpl implements NewsDAO {
     @Override
     public void update(News news) {
         Session session = sessionFactory.openSession();
-
-        session.beginTransaction();
-
         session.saveOrUpdate(news);
-
-        session.getTransaction().commit();
         session.close();
     }
 
     @Override
     public void delete(News news) {
         Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
         session.delete(news);
-
-        session.getTransaction().commit();
         session.close();
     }
 
     @Override
     public void create(News news) {
         Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
         session.save(news);
-
-        session.getTransaction().commit();
         session.close();
     }
 

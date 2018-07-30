@@ -33,34 +33,21 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public void update(User user) {
         Session session = sessionFactory.openSession();
-
-        session.beginTransaction();
-
         session.saveOrUpdate(user);
-
-        session.getTransaction().commit();
         session.close();
     }
 
     @Override
     public void delete(User user) {
         Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
         session.delete(user);
-
-        session.getTransaction().commit();
         session.close();
     }
 
     @Override
     public void create(User user) {
         Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
         session.saveOrUpdate(user);
-
-        session.getTransaction().commit();
         session.close();
     }
 

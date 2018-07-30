@@ -6,7 +6,7 @@
 //import epam.news.model.dto.UserDTO;
 //import epam.news.model.entity.News;
 //import epam.news.model.entity.User;
-//import epam.news.services.NewsService;
+//import epam.news.services.impl.NewsServiceImpl;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Controller;
 //import org.springframework.ui.Model;
@@ -21,7 +21,7 @@
 //public class SpringController {
 //
 //    @Autowired
-//    private NewsService newsService;
+//    private NewsServiceImpl newsService;
 //
 //    @Autowired
 //    private UserServiceImpl userService;

@@ -1,6 +1,6 @@
 package epam.news.action;
 
-import epam.news.services.NewsService;
+import epam.news.services.impl.NewsServiceImpl;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -14,14 +14,14 @@ import java.io.IOException;
 public class DeleteNews extends HttpServlet {
 
     @Inject
-    private NewsService newsService;
+    private NewsServiceImpl newsServiceImpl;
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String[] checkedNews = request.getParameterValues("checkedNews");
         if (checkedNews != null) {
             for (String checkboxValue : checkedNews) {
-                newsService.deleteNews(Long.valueOf(checkboxValue));
+                newsServiceImpl.deleteNews(Long.valueOf(checkboxValue));
             }
         }
         request.getRequestDispatcher("/index.jsp").forward(request, response);

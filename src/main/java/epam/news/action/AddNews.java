@@ -1,9 +1,8 @@
 package epam.news.action;
 
 import epam.news.model.dto.NewsDTO;
-import epam.news.services.NewsService;
+import epam.news.services.impl.NewsServiceImpl;
 
-import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +15,7 @@ import java.io.IOException;
 public class AddNews extends HttpServlet {
 
     @Inject
-    private NewsService newsService;
+    private NewsServiceImpl newsServiceImpl;
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,7 +27,7 @@ public class AddNews extends HttpServlet {
         newsDTO.setTitle(title);
         newsDTO.setBrief(brief);
         newsDTO.setContent(content);
-        newsService.addNews(newsDTO);
+        newsServiceImpl.addNews(newsDTO);
         request.getRequestDispatcher("/index.jsp").forward(request,response);
     }
 }
