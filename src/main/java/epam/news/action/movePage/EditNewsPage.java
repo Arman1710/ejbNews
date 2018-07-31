@@ -1,6 +1,7 @@
 package epam.news.action.movePage;
 
 import epam.news.model.dto.NewsDTO;
+import epam.news.services.NewsService;
 import epam.news.services.impl.NewsServiceImpl;
 
 import javax.inject.Inject;
@@ -15,12 +16,12 @@ import java.io.IOException;
 public class EditNewsPage extends HttpServlet {
 
     @Inject
-    private NewsServiceImpl newsServiceImpl;
+    private NewsService newsService;
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Long newsId = Long.valueOf(request.getParameter("newsId"));
-        NewsDTO newsDTO = newsServiceImpl.selectedNews(newsId);
+        NewsDTO newsDTO = newsService.selectedNews(newsId);
         request.setAttribute("news", newsDTO);
         request.getRequestDispatcher("/WEB-INF/view/editNews.jsp").forward(request,response);
     }

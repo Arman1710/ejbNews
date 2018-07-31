@@ -1,6 +1,7 @@
 package epam.news.action;
 
 import epam.news.model.dto.CommentDTO;
+import epam.news.services.NewsService;
 import epam.news.services.impl.NewsServiceImpl;
 
 import javax.inject.Inject;
@@ -15,7 +16,7 @@ import java.io.IOException;
 public class AddComment extends HttpServlet {
 
     @Inject
-    private NewsServiceImpl newsServiceImpl;
+    private NewsService newsService;
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,7 +26,7 @@ public class AddComment extends HttpServlet {
         commentDTO.setAuthor(request.getParameter("author"));
         commentDTO.setDescription(request.getParameter("description"));
 
-        newsServiceImpl.addComment(newsId, commentDTO);
+        newsService.addComment(newsId, commentDTO);
         request.getRequestDispatcher("/selectedNews").forward(request, response);
     }
 }

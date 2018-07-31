@@ -66,22 +66,8 @@ public class NewsServiceTest {
         doNothing().when(mockedNewsDaoImpl).create(news);
         mockedNewsDaoImpl.create(news);
         verify(mockedNewsDaoImpl).create(news);
-//        mockedNewsDaoImpl.create(news);
-//        System.out.println(news.getTitle());
-//        assertNotNull(news);
     }
 
-    @Test
-    public void addComment() {
-        Comment comment = new Comment();
-        comment.setAuthor("testAuthor");
-        comment.setDescription("testDescription");
-        comment.setNewsId(10L);
-        comment.setDateCreated(new Date());
-        news.getCommentList().add(comment);
-        doNothing().when(mockedNewsDaoImpl).create(news);
-        verify(mockedNewsDaoImpl).create(news);
-    }
 
     @Test
     public void deleteNews() {
