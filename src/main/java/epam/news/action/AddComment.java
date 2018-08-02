@@ -23,7 +23,6 @@ public class AddComment extends HttpServlet {
         Long newsId = Long.valueOf(request.getParameter("newsId"));
 
         CommentDTO commentDTO = new CommentDTO();
-        commentDTO.setAuthor(request.getParameter("author"));
         commentDTO.setDescription(request.getParameter("description"));
 
         newsService.addComment(newsId, commentDTO);

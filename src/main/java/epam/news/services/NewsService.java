@@ -11,9 +11,9 @@ public interface NewsService {
 
     public NewsDTO selectedNews(Long newsId);
 
-    public void editNews(NewsDTO newsDTO, Long newsId);
+    public News editNews(NewsDTO newsDTO, Long newsId);
 
-    public void addNews(NewsDTO newsDTO);
+    public News addNews(NewsDTO newsDTO);
 
     public void addComment(Long newsId, CommentDTO commentDTO);
 

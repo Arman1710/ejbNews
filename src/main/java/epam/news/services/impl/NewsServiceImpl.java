@@ -10,6 +10,8 @@ import epam.news.model.entity.Comment;
 import epam.news.model.entity.News;
 import epam.news.services.NewsService;
 import org.apache.log4j.Logger;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;
@@ -50,7 +52,7 @@ public class NewsServiceImpl implements NewsService {
 
 
     @Override
-    public void editNews(NewsDTO newsDTO, Long newsId) {
+    public News editNews(NewsDTO newsDTO, Long newsId) {
         LOGGER.info("Updating news :" + newsId);
         News news = newsDAO.findById(newsId);
         news.setContent(newsDTO.getContent());
@@ -58,26 +60,28 @@ public class NewsServiceImpl implements NewsService {
         news.setTitle(newsDTO.getTitle());
         newsDAO.update(news);
         LOGGER.info("News :" + newsId + " is updated");
+        return news;
     }
 
     @Override
-    public void addNews(NewsDTO newsDTO) {
+    public News addNews(NewsDTO newsDTO) {
         News news = newsConverter.DTOToEntity(newsDTO);
         newsDAO.create(news);
         LOGGER.info("News :" + news.getTitle() + "is created");
+        return news;
     }
 
     @Override
     public void addComment(Long newsId, CommentDTO commentDTO) {
         LOGGER.info("Creating comment :" + newsId);
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         commentDTO.setDateCreated(new Date());
         Comment comment = commentConverter.DTOToEntity(commentDTO);
 
         News news = newsDAO.findById(newsId);
         comment.setNewsId(news.getNewsId());
-//        comment.setAuthor(auth.getName());
+        comment.setAuthor(auth.getName());
 
         news.getCommentList().add(comment);
         newsDAO.update(news);

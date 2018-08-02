@@ -52,20 +52,25 @@ public class NewsServiceTest {
         assertEquals(10L, newsResult.getNewsId().longValue());
     }
 
-    @Test
-    public void editNews() {
-        doNothing().when(mockedNewsDaoImpl).update(news);
-        news.setNewsId(15L);
-        mockedNewsDaoImpl.update(news);
-        verify(mockedNewsDaoImpl).update(news);
-
-    }
+//    @Test
+//    public void editNews() {
+////        doReturn(news).when(mockedNewsDaoImpl).update(news);
+//        doNothing().when(mockedNewsDaoImpl).create(news);
+//
+//        news.setNewsId(15L);
+//        mockedNewsDaoImpl.update(news);
+//        verify(mockedNewsDaoImpl).update(news);
+//        assertEquals(news.getNewsId().longValue(), 15L);
+//    }
 
     @Test
     public void addNews() {
+//        doReturn(news).when(mockedNewsDaoImpl).create(news);
         doNothing().when(mockedNewsDaoImpl).create(news);
+
         mockedNewsDaoImpl.create(news);
         verify(mockedNewsDaoImpl).create(news);
+        assertEquals(news.getTitle(), "testTitle");
     }
 
 
