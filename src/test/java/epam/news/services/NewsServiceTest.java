@@ -65,8 +65,8 @@ public class NewsServiceTest {
 
     @Test
     public void addNews() {
-//        doReturn(news).when(mockedNewsDaoImpl).create(news);
-        doNothing().when(mockedNewsDaoImpl).create(news);
+        doReturn(news).when(mockedNewsDaoImpl).create(news);
+//        doNothing().when(mockedNewsDaoImpl).create(news);
 
         mockedNewsDaoImpl.create(news);
         verify(mockedNewsDaoImpl).create(news);
