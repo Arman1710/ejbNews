@@ -32,6 +32,7 @@
 <main role="main">
     <div class="container">
         <form action="/admin/editNews" method="post">
+            <input type="hidden" name="newsId" value="${news.newsId}">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <table border="0">
                 <thead>

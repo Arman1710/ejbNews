@@ -23,30 +23,45 @@ public class NewsDAOImpl implements NewsDAO {
 
         session.getTransaction().commit();
         session.close();
-
         return newsList;
 
     }
 
     @Override
-    public void update(News news) {
+    public boolean update(News news) {
         Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
         session.saveOrUpdate(news);
+
+        session.getTransaction().commit();
         session.close();
+        return true;
     }
 
     @Override
-    public void delete(News news) {
+    public boolean delete(News news) {
         Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
         session.delete(news);
+
+        session.getTransaction().commit();
         session.close();
+        return true;
     }
 
     @Override
-    public void create(News news) {
+    public boolean create(News news) {
+
         Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
         session.save(news);
+
+        session.getTransaction().commit();
         session.close();
+        return true;
     }
 
 

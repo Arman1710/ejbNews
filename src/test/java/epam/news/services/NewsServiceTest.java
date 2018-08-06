@@ -11,10 +11,10 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -52,34 +52,21 @@ public class NewsServiceTest {
         assertEquals(10L, newsResult.getNewsId().longValue());
     }
 
-//    @Test
-//    public void editNews() {
-////        doReturn(news).when(mockedNewsDaoImpl).update(news);
-//        doNothing().when(mockedNewsDaoImpl).create(news);
-//
-//        news.setNewsId(15L);
-//        mockedNewsDaoImpl.update(news);
-//        verify(mockedNewsDaoImpl).update(news);
-//        assertEquals(news.getNewsId().longValue(), 15L);
-//    }
 
     @Test
     public void addNews() {
-//        doReturn(news).when(mockedNewsDaoImpl).create(news);
-        doNothing().when(mockedNewsDaoImpl).create(news);
-
-        mockedNewsDaoImpl.create(news);
-        verify(mockedNewsDaoImpl).create(news);
-        assertEquals(news.getTitle(), "testTitle");
+        doReturn(true).when(mockedNewsDaoImpl).create(news);
+        News addedNews = news;
+        mockedNewsDaoImpl.create(addedNews);
+        verify(mockedNewsDaoImpl).create(addedNews);
+        assertEquals(addedNews.getTitle(), "testTitle");
     }
 
 
     @Test
     public void deleteNews() {
-        doNothing().when(mockedNewsDaoImpl).delete(news);
-        when(mockedNewsDaoImpl.findById(10L)).thenReturn(news);
-        News newsResult = mockedNewsDaoImpl.findById(10L);
-        mockedNewsDaoImpl.delete(newsResult);
+        doReturn(true).when(mockedNewsDaoImpl).delete(news);
+        mockedNewsDaoImpl.delete(news);
         verify(mockedNewsDaoImpl).delete(news);
     }
 
@@ -91,7 +78,7 @@ public class NewsServiceTest {
         comment.setNewsId(10L);
         comment.setDateCreated(new Date());
         news.getCommentList().add(comment);
-        doNothing().when(mockedNewsDaoImpl).update(news);
+        doReturn(true).when(mockedNewsDaoImpl).update(news);
         mockedNewsDaoImpl.update(news);
         for (Comment updatedComment : news.getCommentList()) {
             assertEquals(updatedComment.getAuthor(), "UpdatedtestAuthor");

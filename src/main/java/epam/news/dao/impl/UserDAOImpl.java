@@ -26,29 +26,43 @@ public class UserDAOImpl implements UserDAO {
 
         session.getTransaction().commit();
         session.close();
-
         return userList;
     }
 
     @Override
-    public void update(User user) {
+    public boolean update(User user) {
         Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
         session.saveOrUpdate(user);
+
+        session.getTransaction().commit();
         session.close();
+        return true;
     }
 
     @Override
-    public void delete(User user) {
+    public boolean delete(User user) {
         Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
         session.delete(user);
+
+        session.getTransaction().commit();
         session.close();
+        return true;
     }
 
     @Override
-    public void create(User user) {
+    public boolean create(User user) {
         Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
         session.saveOrUpdate(user);
+
+        session.getTransaction().commit();
         session.close();
+        return true;
     }
 
     @Override

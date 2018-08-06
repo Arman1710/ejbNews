@@ -21,13 +21,14 @@ public class UserServiceImpl implements UserService {
     @Inject
     private UserDAO userDAO;
 
-    public void createUser(UserDTO userDTO) {
+    public boolean createUser(UserDTO userDTO) {
         LOGGER.info("creating user");
         User user = userConverter.DTOToEntity(userDTO);
         user.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
         user.setRoleId(2L);
-        userDAO.create(user);
+        boolean isUserCreated = userDAO.create(user);
         LOGGER.info("User is created: " + user);
+        return isUserCreated;
     }
 
     public User getUserByUsername(String username) {

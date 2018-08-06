@@ -63,39 +63,42 @@
         </div>
     </div>
     <div class="container">
-        <form modelAttribute="comment" action="/addComment" method="get">
-            <input type="hidden" name="newsId" value="${news.newsId}">
-            <table border="0">
-                <thead>
-                <tr>
-                    <th><fmt:message key="comment.add"/></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>
-                        <fmt:message key="comment.Description"/>
-                    </td>
-                    <%--<td>--%>
-                        <%--<textarea name="author" cols="100" rows="2" class="form-control mr-sm-2" required></textarea>--%>
-                    <%--</td>--%>
-                </tr>
-                <tr>
-                <td>
-                    <textarea name="description" cols="100" rows="5" class="form-control mr-sm-2" required></textarea>
-                </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <br>
-                        <input type="submit" class="btn btn-primary btn-md"
-                               value="<fmt:message key="comment.add"/>">
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </form>
+        <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
+            <form modelAttribute="comment" action="/addComment" method="get">
+                <input type="hidden" name="newsId" value="${news.newsId}">
+                <table border="0">
+                    <thead>
+                    <tr>
+                        <th><fmt:message key="comment.add"/></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <fmt:message key="comment.Description"/>
+                        </td>
+                            <%--<td>--%>
+                            <%--<textarea name="author" cols="100" rows="2" class="form-control mr-sm-2" required></textarea>--%>
+                            <%--</td>--%>
+                    </tr>
+                    <tr>
+                        <td>
+                            <textarea name="description" cols="100" rows="5" class="form-control mr-sm-2"
+                                      required></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <br>
+                            <input type="submit" class="btn btn-primary btn-md"
+                                   value="<fmt:message key="comment.add"/>">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </sec:authorize>
 
 
         <div class="container">

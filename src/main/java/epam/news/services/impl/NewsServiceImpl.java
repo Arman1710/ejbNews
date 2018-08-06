@@ -72,7 +72,7 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public void addComment(Long newsId, CommentDTO commentDTO) {
+    public boolean addComment(Long newsId, CommentDTO commentDTO) {
         LOGGER.info("Creating comment :" + newsId);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
@@ -84,21 +84,31 @@ public class NewsServiceImpl implements NewsService {
         comment.setAuthor(auth.getName());
 
         news.getCommentList().add(comment);
-        newsDAO.update(news);
-        LOGGER.info("Comments :" + news + "is created");
+        boolean isCommentAdded = newsDAO.update(news);
+        if (isCommentAdded){
+            LOGGER.info("Comments :" + news + "is created");
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
-    public void deleteNews(final Long newsId) {
+    public boolean deleteNews(Long newsId) {
         LOGGER.info("delete news :" + newsId);
 
-        newsDAO.delete(newsDAO.findById(newsId));
+        boolean isNewsDeleted = newsDAO.delete(newsDAO.findById(newsId));
 
-        LOGGER.info("News :" + newsId + " is deleted");
+        if (isNewsDeleted){
+            LOGGER.info("News :" + newsId + " is deleted");
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
-    public void deleteComment(final Long newsId, final Long commentId) {
+    public boolean deleteComment(final Long newsId, final Long commentId) {
         LOGGER.info("delete comment :" + commentId);
         final News news = newsDAO.findById(newsId);
         final Iterator<Comment> itr = news.getCommentList().iterator();
@@ -109,8 +119,13 @@ public class NewsServiceImpl implements NewsService {
                 itr.remove();
             }
         }
-        newsDAO.update(news);
-        LOGGER.info("News :" + commentId + " is deleted");
+        boolean isCommentDeleted = newsDAO.update(news);
+        if (isCommentDeleted){
+            LOGGER.info("News :" + commentId + " is deleted");
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
