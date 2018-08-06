@@ -40,7 +40,7 @@ public class NewsDAOImpl implements NewsDAO {
     }
 
     @Override
-    public boolean delete(News news) {
+    public News delete(News news) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
@@ -48,7 +48,7 @@ public class NewsDAOImpl implements NewsDAO {
 
         session.getTransaction().commit();
         session.close();
-        return true;
+        return news;
     }
 
     @Override

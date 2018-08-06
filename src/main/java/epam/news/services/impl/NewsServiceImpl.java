@@ -94,17 +94,13 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public boolean deleteNews(Long newsId) {
+    public News deleteNews(Long newsId) {
         LOGGER.info("delete news :" + newsId);
 
-        boolean isNewsDeleted = newsDAO.delete(newsDAO.findById(newsId));
+        News deleteObject = newsDAO.delete(newsDAO.findById(newsId));
 
-        if (isNewsDeleted){
-            LOGGER.info("News :" + newsId + " is deleted");
-            return true;
-        } else {
-            return false;
-        }
+        LOGGER.info("News :" + newsId + " is deleted");
+        return  deleteObject;
     }
 
     @Override

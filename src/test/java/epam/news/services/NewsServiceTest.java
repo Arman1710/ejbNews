@@ -65,9 +65,12 @@ public class NewsServiceTest {
 
     @Test
     public void deleteNews() {
-        doReturn(true).when(mockedNewsDaoImpl).delete(news);
+        doReturn(news).when(mockedNewsDaoImpl).delete(news);
+
         mockedNewsDaoImpl.delete(news);
         verify(mockedNewsDaoImpl).delete(news);
+
+        assertEquals(news.getTitle(), "testTitle");
     }
 
     @Test

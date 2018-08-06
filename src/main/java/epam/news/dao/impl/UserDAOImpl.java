@@ -1,6 +1,7 @@
 package epam.news.dao.impl;
 
 import epam.news.dao.UserDAO;
+import epam.news.model.entity.News;
 import epam.news.model.entity.User;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -42,7 +43,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public boolean delete(User user) {
+    public User delete(User user) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
@@ -50,7 +51,7 @@ public class UserDAOImpl implements UserDAO {
 
         session.getTransaction().commit();
         session.close();
-        return true;
+        return user;
     }
 
     @Override

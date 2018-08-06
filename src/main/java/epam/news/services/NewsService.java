@@ -17,7 +17,7 @@ public interface NewsService {
 
     boolean addComment(Long newsId, CommentDTO commentDTO);
 
-    boolean deleteNews(final Long newsId);
+    News deleteNews(final Long newsId);
 
     boolean deleteComment(final Long newsId, final Long commentId);
 }
