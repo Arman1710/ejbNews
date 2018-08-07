@@ -14,6 +14,7 @@ import javax.ejb.Stateless;
 import java.util.List;
 
 @Stateless
+@SuppressWarnings("Duplicates")
 public class UserDAOImpl implements UserDAO {
 
     private SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();

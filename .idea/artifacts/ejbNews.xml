@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="ejbNews">
-    <output-path>$PROJECT_DIR$/out/artifacts/ejbNews</output-path>
+    <output-path>$PROJECT_DIR$/out/artifacts/ejbNews-1.0</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
