@@ -7,9 +7,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import javax.ejb.Stateless;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Stateless
+@Transactional
 public class NewsDAOImpl implements NewsDAO {
 
     private SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
@@ -28,7 +30,7 @@ public class NewsDAOImpl implements NewsDAO {
     }
 
     @Override
-    public boolean update(News news) {
+    public News update(News news) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
@@ -36,7 +38,7 @@ public class NewsDAOImpl implements NewsDAO {
 
         session.getTransaction().commit();
         session.close();
-        return true;
+        return news;
     }
 
     @Override
@@ -52,16 +54,15 @@ public class NewsDAOImpl implements NewsDAO {
     }
 
     @Override
-    public boolean create(News news) {
-
+    public News create(News news) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        session.save(news);
+        session.saveOrUpdate(news);
 
         session.getTransaction().commit();
         session.close();
-        return true;
+        return news;
     }
 
 

@@ -9,10 +9,10 @@ import java.util.List;
 public interface BasicDAO<T extends Basic> {
     List<T> read();
 
-    boolean update(T model);
+    T update(T model);
 
     T delete(T model);
 
-    boolean create(T model);
+    T create(T model);
 
 }

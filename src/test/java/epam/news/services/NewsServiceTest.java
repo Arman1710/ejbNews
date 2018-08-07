@@ -32,6 +32,12 @@ public class NewsServiceTest {
         news.setBrief("testBrief");
         news.setTitle("testTitle");
         news.setNewsId(10L);
+        Comment comment = new Comment();
+        comment.setAuthor("UpdatedtestAuthor");
+        comment.setDescription("UpdatedtestDescription");
+        comment.setNewsId(10L);
+        comment.setDateCreated(new Date());
+        news.getCommentList().add(comment);
     }
 
     @Test
@@ -55,7 +61,7 @@ public class NewsServiceTest {
 
     @Test
     public void addNews() {
-        doReturn(true).when(mockedNewsDaoImpl).create(news);
+        doReturn(news).when(mockedNewsDaoImpl).create(news);
         News addedNews = news;
         mockedNewsDaoImpl.create(addedNews);
         verify(mockedNewsDaoImpl).create(addedNews);
@@ -75,17 +81,11 @@ public class NewsServiceTest {
 
     @Test
     public void deleteComment() {
-        Comment comment = new Comment();
-        comment.setAuthor("UpdatedtestAuthor");
-        comment.setDescription("UpdatedtestDescription");
-        comment.setNewsId(10L);
-        comment.setDateCreated(new Date());
-        news.getCommentList().add(comment);
-        doReturn(true).when(mockedNewsDaoImpl).update(news);
+        doReturn(news).when(mockedNewsDaoImpl).update(news);
+
         mockedNewsDaoImpl.update(news);
-        for (Comment updatedComment : news.getCommentList()) {
-            assertEquals(updatedComment.getAuthor(), "UpdatedtestAuthor");
-        }
+
         verify(mockedNewsDaoImpl).update(news);
+
     }
 }

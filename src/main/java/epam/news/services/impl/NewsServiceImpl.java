@@ -54,25 +54,25 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public News editNews(NewsDTO newsDTO, Long newsId) {
         LOGGER.info("Updating news :" + newsId);
-        News news = newsDAO.findById(newsId);
-        news.setContent(newsDTO.getContent());
-        news.setBrief(newsDTO.getBrief());
-        news.setTitle(newsDTO.getTitle());
-        newsDAO.update(news);
+        News editedNews = newsDAO.findById(newsId);
+        editedNews.setContent(newsDTO.getContent());
+        editedNews.setBrief(newsDTO.getBrief());
+        editedNews.setTitle(newsDTO.getTitle());
+        newsDAO.update(editedNews);
         LOGGER.info("News :" + newsId + " is updated");
-        return news;
+        return editedNews;
     }
 
     @Override
     public News addNews(NewsDTO newsDTO) {
         News news = newsConverter.DTOToEntity(newsDTO);
-        newsDAO.create(news);
+        News createdNews = newsDAO.create(news);
         LOGGER.info("News :" + news.getTitle() + "is created");
-        return news;
+        return createdNews;
     }
 
     @Override
-    public boolean addComment(Long newsId, CommentDTO commentDTO) {
+    public News addComment(Long newsId, CommentDTO commentDTO) {
         LOGGER.info("Creating comment :" + newsId);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
@@ -84,27 +84,24 @@ public class NewsServiceImpl implements NewsService {
         comment.setAuthor(auth.getName());
 
         news.getCommentList().add(comment);
-        boolean isCommentAdded = newsDAO.update(news);
-        if (isCommentAdded){
-            LOGGER.info("Comments :" + news + "is created");
-            return true;
-        } else {
-            return false;
-        }
+        News newWithAddedComment = newsDAO.update(news);
+
+        LOGGER.info("Comments :" + news + "is created");
+        return newWithAddedComment;
     }
 
     @Override
     public News deleteNews(Long newsId) {
         LOGGER.info("delete news :" + newsId);
 
-        News deleteObject = newsDAO.delete(newsDAO.findById(newsId));
+        News deletedObject = newsDAO.delete(newsDAO.findById(newsId));
 
         LOGGER.info("News :" + newsId + " is deleted");
-        return  deleteObject;
+        return deletedObject;
     }
 
     @Override
-    public boolean deleteComment(final Long newsId, final Long commentId) {
+    public News deleteComment(final Long newsId, final Long commentId) {
         LOGGER.info("delete comment :" + commentId);
         final News news = newsDAO.findById(newsId);
         final Iterator<Comment> itr = news.getCommentList().iterator();
@@ -115,13 +112,9 @@ public class NewsServiceImpl implements NewsService {
                 itr.remove();
             }
         }
-        boolean isCommentDeleted = newsDAO.update(news);
-        if (isCommentDeleted){
-            LOGGER.info("News :" + commentId + " is deleted");
-            return true;
-        } else {
-            return false;
-        }
+        News newsWithDeletedComment = newsDAO.update(news);
+        LOGGER.info("News :" + commentId + " is deleted");
+        return newsWithDeletedComment;
     }
 
 }

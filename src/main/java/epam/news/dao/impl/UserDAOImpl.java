@@ -31,7 +31,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public boolean update(User user) {
+    public User update(User user) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
@@ -39,7 +39,7 @@ public class UserDAOImpl implements UserDAO {
 
         session.getTransaction().commit();
         session.close();
-        return true;
+        return user;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public boolean create(User user) {
+    public User create(User user) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
@@ -63,7 +63,7 @@ public class UserDAOImpl implements UserDAO {
 
         session.getTransaction().commit();
         session.close();
-        return true;
+        return user;
     }
 
     @Override
