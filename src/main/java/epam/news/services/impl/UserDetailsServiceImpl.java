@@ -16,7 +16,7 @@ import java.util.Set;
 @Component
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Resource(lookup = "java:app/ejbNews/UserServiceImpl")
+    @Resource(lookup = "java:app/ejbNews-1.0/UserServiceImpl")
     private UserService userService;
 
     @Override
